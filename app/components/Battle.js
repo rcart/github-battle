@@ -1,5 +1,6 @@
 var React = require('react');
 var PlayerInput = require('./PlayerInput');
+var PlayerPreview = require('./PlayerPreview');
 
 class Battle extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Battle extends React.Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   handleSubmit(id, username) {
@@ -23,8 +25,21 @@ class Battle extends React.Component {
     });
   }
 
+  handleReset(id) {
+    this.setState({
+      [id + 'Name']: '',
+      [id + 'Image']: null
+    });
+  }
+
   render() {
-    const { playerOneName, playerTwoName } = this.state;
+    // Destructuring. I can't avoid using ES6 in some places where it is sexier than ES5
+    const {
+      playerOneName,
+      playerTwoName,
+      playerOneImage,
+      playerTwoImage
+    } = this.state;
     return (
       <div className="row">
         {!playerOneName &&
@@ -33,6 +48,13 @@ class Battle extends React.Component {
               label='Player One'
               onSubmit={this.handleSubmit}
             />}
+        {playerOneImage !== null &&
+          <PlayerPreview
+            avatar={playerOneImage}
+            username={playerOneName}
+            onReset={this.handleReset}
+            id='playerOne'
+          />}
 
         {!playerTwoName &&
             <PlayerInput
@@ -40,6 +62,13 @@ class Battle extends React.Component {
               label='Player Two'
               onSubmit={this.handleSubmit}
             />}
+        {playerTwoImage !== null &&
+          <PlayerPreview
+            avatar={playerTwoImage}
+            username={playerTwoName}
+            onReset={this.handleReset}
+            id='playerTwo'
+          />}
       </div>
     );
   }
