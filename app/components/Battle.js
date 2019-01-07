@@ -1,6 +1,7 @@
 var React = require('react');
 var PlayerInput = require('./PlayerInput');
 var PlayerPreview = require('./PlayerPreview');
+var Link = require('react-router-dom').Link;
 
 class Battle extends React.Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class Battle extends React.Component {
   }
 
   render() {
+    const match = this.props.match;
     // Destructuring. I can't avoid using ES6 in some places where it is sexier than ES5
     const {
       playerOneName,
@@ -41,34 +43,46 @@ class Battle extends React.Component {
       playerTwoImage
     } = this.state;
     return (
-      <div className="row">
-        {!playerOneName &&
-            <PlayerInput
+      <div>
+        <div className="row">
+          {!playerOneName &&
+              <PlayerInput
+                id='playerOne'
+                label='Player One'
+                onSubmit={this.handleSubmit}
+              />}
+          {playerOneImage !== null &&
+            <PlayerPreview
+              avatar={playerOneImage}
+              username={playerOneName}
+              onReset={this.handleReset}
               id='playerOne'
-              label='Player One'
-              onSubmit={this.handleSubmit}
             />}
-        {playerOneImage !== null &&
-          <PlayerPreview
-            avatar={playerOneImage}
-            username={playerOneName}
-            onReset={this.handleReset}
-            id='playerOne'
-          />}
 
-        {!playerTwoName &&
-            <PlayerInput
+          {!playerTwoName &&
+              <PlayerInput
+                id='playerTwo'
+                label='Player Two'
+                onSubmit={this.handleSubmit}
+              />}
+          {playerTwoImage !== null &&
+            <PlayerPreview
+              avatar={playerTwoImage}
+              username={playerTwoName}
+              onReset={this.handleReset}
               id='playerTwo'
-              label='Player Two'
-              onSubmit={this.handleSubmit}
             />}
-        {playerTwoImage !== null &&
-          <PlayerPreview
-            avatar={playerTwoImage}
-            username={playerTwoName}
-            onReset={this.handleReset}
-            id='playerTwo'
-          />}
+        </div>
+        {playerOneImage && playerTwoImage &&
+          <Link
+            className="button"
+            to={{
+              pathname: match.url + '/results',
+              search: '?playerOneName=' + playerOneName + '&playerTwoName=' + playerTwoName
+            }}>
+            Battle
+          </Link>
+        } 
       </div>
     );
   }
