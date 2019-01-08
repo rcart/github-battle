@@ -1,11 +1,13 @@
 var React = require('react');
 var PropTypes = require('prop-types');
+var Profile =  require('./Profile');
 
 function Player(props) {
   return (
     <div>
       <h1 className="header">{props.label}</h1>
       <h3 style={{textAlign: 'center'}}>Score: {props.score}</h3>
+      <Profile info={props.profile} />
     </div>
   );
 }
