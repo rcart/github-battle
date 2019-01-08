@@ -3,6 +3,7 @@ var queryString = require('query-string');
 var api = require('../utils/api');
 var Link = require('react-router-dom').Link;
 var Player = require('./Player');
+var Loading = require('./Loading');
 
 class Results extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class Results extends React.Component {
   render() {
     var { error, winner, loser, loading } = this.state;
 
-    if(loading) return <p className="loading">Loading...</p>;
+    if(loading) return <Loading />;
     if(error) {
       <div>
         <p>Error</p>
