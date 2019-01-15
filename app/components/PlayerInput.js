@@ -1,5 +1,5 @@
-var React = require('react');
-var PropTypes = require('prop-types');
+const React = require('react');
+const PropTypes = require('prop-types');
 
 class PlayerInput extends React.Component {
   constructor(props) {
@@ -23,23 +23,25 @@ class PlayerInput extends React.Component {
   }
 
   render() {
+    const { username } = this.state;
+    const { label } = this.props;
     return (
       <form className="column" onSubmit={this.handleSubmit}>
         <label className="header" htmlFor="usernamee">
-          {this.props.label}
+          {label}
         </label>
         <input
           id="username"
           type="text"
           placeholder="github username"
           autoComplete="off"
-          value={this.state.username}
+          value={username}
           onChange={this.handleChange}
         />
         <button
           className="button"
           type="submit"
-          disabled={!this.state.username}
+          disabled={!username}
         >
           Submit
         </button>

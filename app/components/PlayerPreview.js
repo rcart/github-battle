@@ -1,5 +1,5 @@
-var React = require('react');
-var PropTypes = require('prop-types');
+const React = require('react');
+const PropTypes = require('prop-types');
 
 function PlayerPreview(props) {
   return (
@@ -7,7 +7,7 @@ function PlayerPreview(props) {
       <img
         className="avatar"
         src={props.avatar}
-        alt={'Avatar for ' + props.username}
+        alt={`Avatar for ${props.username}`}
       />
       <h2 className="username">@{props.username}</h2>
       {props.children}

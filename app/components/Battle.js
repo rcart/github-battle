@@ -1,7 +1,7 @@
-var React = require('react');
-var PlayerInput = require('./PlayerInput');
-var PlayerPreview = require('./PlayerPreview');
-var Link = require('react-router-dom').Link;
+const React = require('react');
+const PlayerInput = require('./PlayerInput');
+const PlayerPreview = require('./PlayerPreview');
+const Link = require('react-router-dom').Link;
 
 class Battle extends React.Component {
   constructor(props) {
@@ -20,9 +20,8 @@ class Battle extends React.Component {
 
   handleSubmit(id, username) {
     this.setState({
-      // Again mixing ES6 in ES5 to make it work without function expresion in setState
       [id + 'Name']: username,
-      [id + 'Image']: 'https://github.com/' + username + '.png?size=200'
+      [id + 'Image']: `https://github.com/${username}.png?size=200`
     });
   }
 
@@ -34,8 +33,7 @@ class Battle extends React.Component {
   }
 
   render() {
-    const match = this.props.match;
-    // Destructuring. I can't avoid using ES6 in some places where it is sexier than ES5
+    const { match } = this.props;
     const {
       playerOneName,
       playerTwoName,
@@ -57,7 +55,7 @@ class Battle extends React.Component {
               username={playerOneName}>
               <button
                 className="reset"
-                onClick={this.handleReset.bind(null, 'playerOne')}
+                onClick={() => this.handleReset('playerOne')}
               >
                 Reset
               </button>
@@ -76,7 +74,7 @@ class Battle extends React.Component {
               username={playerTwoName}>
               <button
                 className="reset"
-                onClick={this.handleReset.bind(null, 'playerTwo')}
+                onClick={() => this.handleReset('playerTwo')}
               >
                 Reset
               </button>
@@ -87,8 +85,8 @@ class Battle extends React.Component {
           <Link
             className="button"
             to={{
-              pathname: match.url + '/results',
-              search: '?playerOneName=' + playerOneName + '&playerTwoName=' + playerTwoName
+              pathname:`${match.url}/results`,
+              search: `?playerOneName=${playerOneName}&playerTwoName=${playerTwoName}`
             }}>
             Battle
           </Link>

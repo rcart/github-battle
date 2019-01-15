@@ -1,9 +1,9 @@
-var React = require('react');
-var queryString = require('query-string');
-var api = require('../utils/api');
-var Link = require('react-router-dom').Link;
-var Player = require('./Player');
-var Loading = require('./Loading');
+const React = require('react');
+const queryString = require('query-string');
+const api = require('../utils/api');
+const Link = require('react-router-dom').Link;
+const Player = require('./Player');
+const Loading = require('./Loading');
 
 class Results extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class Results extends React.Component {
     }
   }
   componentDidMount() {
-    var players = queryString.parse(this.props.location.search)
+    const players = queryString.parse(this.props.location.search)
     api.battle([
       players.playerOneName,
       players.playerTwoName
@@ -38,7 +38,7 @@ class Results extends React.Component {
   }
 
   render() {
-    var { error, winner, loser, loading } = this.state;
+    const { error, winner, loser, loading } = this.state;
 
     if(loading) return <Loading />;
     if(error) {
