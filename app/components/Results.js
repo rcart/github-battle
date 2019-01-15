@@ -21,7 +21,7 @@ class Results extends React.Component {
       players.playerOneName,
       players.playerTwoName
     ])
-      .then(function(results) {
+      .then((results) => {
         if(results === null) {
           return this.setState({
             loading: false,
@@ -34,7 +34,7 @@ class Results extends React.Component {
           winner: results[0],
           loser: results[1]
         });
-      }.bind(this))
+      })
   }
 
   render() {

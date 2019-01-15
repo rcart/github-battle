@@ -25,11 +25,9 @@ class Popular extends React.Component {
       repos: null
     });
 
-    // It's very hard to try to use ES5 mixed with ES6. Here I must use an arrow function to avoid using a regular function expresion on setState to work around the correct context (this)
+    // No need to catch the errors since api takes care of it.
     api.fetchPopularRepos(lang)
-      .then(res => {
-        this.setState({ repos: res });
-      })
+      .then(res => this.setState({ repos: res }))
   }
 
   render() {

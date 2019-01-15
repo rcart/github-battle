@@ -1,6 +1,6 @@
-var React = require('react');
-var PropTypes = require('prop-types');
-var Profile =  require('./Profile');
+const React = require('react');
+const PropTypes = require('prop-types');
+const Profile =  require('./Profile');
 
 function Player(props) {
   return (
